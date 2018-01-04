@@ -1,10 +1,17 @@
-const parseMs = require('parse-ms')
-const addZero = require('add-zero')
+'use strict';
 
-module.exports = (ms) => {
-  let { days, hours, minutes, seconds } = parseMs(ms)
-  seconds = addZero(seconds)
-  if (days) return `${days}:${addZero(hours)}:${addZero(minutes)}:${seconds}`
-  if (hours) return `${hours}:${addZero(minutes)}:${seconds}`
-  return `${minutes}:${seconds}`
-}
+var parseMs = require('parse-ms');
+var addZero = require('add-zero');
+
+module.exports = function (ms) {
+  var _parseMs = parseMs(ms),
+      days = _parseMs.days,
+      hours = _parseMs.hours,
+      minutes = _parseMs.minutes,
+      seconds = _parseMs.seconds;
+
+  seconds = addZero(seconds);
+  if (days) return days + ':' + addZero(hours) + ':' + addZero(minutes) + ':' + seconds;
+  if (hours) return hours + ':' + addZero(minutes) + ':' + seconds;
+  return minutes + ':' + seconds;
+};
